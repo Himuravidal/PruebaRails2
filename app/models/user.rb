@@ -5,4 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :pending_task
   has_many :todos, through: :pending_task
+  after_create :load_pending_task
+
+
+
+  private
+  def load_pending_task
+    Todo.all.each do |todo|
+      PendingTask.create(user_id: self.id, todo_id: todo.id)
+    end
+  end
+
 end

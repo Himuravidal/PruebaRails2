@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Todo.destroy_all
+10.times do |i|
+  Todo.create(
+    description: Faker::LordOfTheRings.character,
+    photo: "http://lorempixel.com/400/200/food/#{i + 1}/"
+  )
+end
