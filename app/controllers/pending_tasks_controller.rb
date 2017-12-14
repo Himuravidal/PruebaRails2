@@ -1,8 +1,10 @@
 class PendingTasksController < ApplicationController
 
 def update
-PendingTask.find(params[:id])
-
+@pending = PendingTask.find(params[:id])
+ @pending.done = not(@pending.done)
+ @pending.save
+redirect_back(fallback_location: 'root')
 end
 
 
