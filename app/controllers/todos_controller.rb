@@ -4,4 +4,9 @@ class TodosController < ApplicationController
   end
 
 
+  def show
+    @list = User.all
+    @todos = Todo.all
+  end
+
 end

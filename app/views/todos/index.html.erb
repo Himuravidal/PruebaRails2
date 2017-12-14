@@ -5,20 +5,16 @@
       <% row.each do |todo| %>
         <div class="col">
           <div class="card">
-            <%= image_tag todo.photo, class: 'card-img-top' %>
+            <%= link_to image_tag(todo.photo),todo_path(todo.id) , class: 'card-img-top' %>
             <div class="body">
               <h5><%= todo.description %></h5>
               <p><%= todo.updated_at%></p>
-
               <% pending = todo.pending_tasks.where(user: current_user) %>
               <% if pending.any? && pending.take.done? %>
                 <p><%= link_to "Listo", user_pending_task_path(current_user,todo.id),method: :patch, class: 'btn btn-primary'%></p>
                <% else %>
-
                 <p><%= link_to "No listo", user_pending_task_path(current_user,todo.id),method: :patch, class: 'btn btn-danger'%></p>
               <%end%>
-
-
         </div>
       </div>
     </div>
