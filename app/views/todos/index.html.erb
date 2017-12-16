@@ -8,7 +8,6 @@
             <div class="body">
               <h5><%= link_to todo.todo.description, todo_path(todo.todo) %></h5>
               <p><%= time_ago_in_words todo.updated_at%></p>
-
               <% if todo.done? %>
                 <p><%= link_to "Listo", pending_task_path(todo.id),method: :patch, class: 'btn btn-primary'%></p>
                <% else %>

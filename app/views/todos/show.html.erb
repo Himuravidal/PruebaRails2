@@ -1,16 +1,16 @@
 <div class="container">
-  <div class="row">
-    <% @todos.pending_tasks.each do |todo| %>
-        <div class="col">
-            <div class="body">
+  <h2> Ranking de Usuarios que terminaron primero la tarea '<%= @todos.description %>'</h2>
 
-            <%= todo.user.email %>
+    <% @todos.pending_tasks.limit(5).each do |todo| %>
+
+            <ul>
+                <li><%= todo.user.email %></li>
+
+            </ul>
 
 
-        </div>
 
-    </div>
 
 <% end %>
-</div>
+
 </div>
