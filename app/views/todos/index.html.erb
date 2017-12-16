@@ -1,19 +1,18 @@
-<h1>Todos#index</h1>
 <div class="container">
   <div class="row">
-    <% @todos.each_slice(3) do |row| %>
+    <% @user.pending_tasks.each_slice(3) do |row| %>
       <% row.each do |todo| %>
         <div class="col">
           <div class="card">
-            <%= link_to image_tag(todo.photo),todo_path(todo.id) , class: 'card-img-top' %>
+            <%= image_tag todo.todo.photo, class: 'card-img-top' %>
             <div class="body">
-              <h5><%= todo.description %></h5>
-              <p><%= todo.updated_at%></p>
-              <% pending = todo.pending_tasks.where(user: current_user) %>
-              <% if pending.any? && pending.take.done? %>
-                <p><%= link_to "Listo", user_pending_task_path(current_user,todo.id),method: :patch, class: 'btn btn-primary'%></p>
+              <h5><%= link_to todo.todo.description, todo_path(todo.todo) %></h5>
+              <p><%= time_ago_in_words todo.updated_at%></p>
+
+              <% if todo.done? %>
+                <p><%= link_to "Listo", pending_task_path(todo.id),method: :patch, class: 'btn btn-primary'%></p>
                <% else %>
-                <p><%= link_to "No listo", user_pending_task_path(current_user,todo.id),method: :patch, class: 'btn btn-danger'%></p>
+                <p><%= link_to "No listo", pending_task_path(todo.id),method: :patch, class: 'btn btn-danger'%></p>
               <%end%>
         </div>
       </div>

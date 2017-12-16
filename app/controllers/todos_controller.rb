@@ -1,12 +1,12 @@
 class TodosController < ApplicationController
+before_action :authenticate_user!
   def index
-    @todos = Todo.all
+    @user = current_user
   end
 
 
   def show
-    @list = User.all
-    @todos = Todo.all
+    @todos = Todo.find(params[:id])
   end
 
 end

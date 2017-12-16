@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
-    <% @todos.each do |todo| %>
+    <% @todos.pending_tasks.each do |todo| %>
         <div class="col">
             <div class="body">
 
-            <%= @User %>
+            <%= todo.user.email %>
 
 
         </div>

@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :pending_task
-  has_many :todos, through: :pending_task
+  has_many :pending_tasks
+  has_many :todos, through: :pending_tasks
   after_create :load_pending_task
 
 
