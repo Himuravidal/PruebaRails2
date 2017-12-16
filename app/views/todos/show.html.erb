@@ -1,16 +1,38 @@
 <div class="container">
-  <h2> Ranking de Usuarios que terminaron primero la tarea '<%= @todos.description %>'</h2>
+  <h2>
+    Ranking de Usuarios que terminaron primero la tarea '<%= @todos.description %>'</h2>
 
-    <% @todos.pending_tasks.limit(5).each do |todo| %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">
+          Usuario
+        </th>
+        <th scope="col">
+          Foto
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @todos.pending_tasks.order(updated_at: :asc).where(done: true).take(5).each do |todo| %>
+        <tr>
+          <td><%= todo.user.name %></td>
+          <td><%= image_tag todo.user.photo,class: "img-responsive" unless todo.user.photo.blank? %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-            <ul>
-                <li><%= todo.user.email %></li>
+  <h2>
+    Usuarios que Completaron la Tarea:
+  </h2>
 
-            </ul>
+  <% @todos.pending_tasks.where(done: true).each do |done| %>
+    <ul>
+      <li>
+        <%= done.user.name %>
+    </ul>
 
-
-
-
-<% end %>
+  <% end %>
 
 </div>
